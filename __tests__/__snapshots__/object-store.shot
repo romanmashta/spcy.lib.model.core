@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Object store tests 1`] = `
+{
+  "collections": [
+    {
+      "name": "to-do",
+      "type": {
+        "$ref": "#/$defs/ToDo"
+      }
+    },
+    {
+      "name": "users",
+      "type": {
+        "$ref": "#/$defs/User"
+      }
+    }
+  ]
+}
+`;
