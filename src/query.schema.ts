@@ -4,16 +4,16 @@ export const StatementSchema: TypeInfo = {
   $id: '#/$defs/Statement',
   oneOf: [
     {
-      $ref: '#/$defs/StringType'
+      type: 'string'
     },
     {
-      $ref: '#/$defs/NumberType'
+      type: 'number'
     },
     {
-      $ref: '#/$defs/BooleanType'
+      type: 'boolean'
     },
     {
-      $ref: '#/$defs/NullType'
+      type: 'null'
     },
     {
       type: 'array',
@@ -25,16 +25,19 @@ export const StatementSchema: TypeInfo = {
 };
 
 SchemaRepository.register(StatementSchema);
-export const QueryModelSchema: TypeInfo = {
-  $id: '#/$defs/QueryModel',
+export const QuerySchema: TypeInfo = {
+  $id: '#/$defs/Query',
   type: 'object',
-  required: ['collection', 'columns', 'criteria'],
+  required: ['collection'],
   properties: {
     collection: {
       type: 'string'
     },
     columns: {
-      $ref: '#/$defs/TypeInfo'
+      type: 'array',
+      items: {
+        type: 'string'
+      }
     },
     criteria: {
       type: 'array',
@@ -45,11 +48,11 @@ export const QueryModelSchema: TypeInfo = {
   }
 };
 
-SchemaRepository.register(QueryModelSchema);
+SchemaRepository.register(QuerySchema);
 
 export const MetaSchema: Module = {
   $defs: {
     Statement: StatementSchema,
-    QueryModel: QueryModelSchema
+    Query: QuerySchema
   }
 };

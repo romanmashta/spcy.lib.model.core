@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Query tests 1`] = `
+{
+  "collection": "to-do",
+  "columns": [
+    "isDone",
+    "Description"
+  ],
+  "criteria": [
+    "country",
+    "in",
+    [
+      "USA",
+      "Japan"
+    ]
+  ]
+}
+`;

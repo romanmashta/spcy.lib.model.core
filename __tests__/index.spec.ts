@@ -2,8 +2,9 @@ import '@spcy/lib.dev.tasty';
 import { ModelRepository } from '@spcy/lib.core.mst-model';
 import { getSnapshot } from '@spcy/pub.mobx-state-tree';
 import { CollectionSchema, ObjectStoreSchema } from '../src/collection.schema';
-import { Collection, ObjectStore } from '../src';
-import { ToDoSchema, UserSchema } from './to-do/to-do.schema';
+import { Collection, ObjectStore, Query } from '../src';
+import { ToDoSchema, UserSchema } from './models/to-do/to-do.schema';
+import { QuerySchema } from '../src/query.schema';
 
 test('Collection tests', () => {
   const collectionModel = ModelRepository.resolve(CollectionSchema.$id!);
@@ -38,5 +39,17 @@ test('Object store tests', () => {
   };
   const collection = objectStoreModel.create(storeData);
   expect(getSnapshot(collection)).toMatchTastyShot('object-store');
+  expect(true).toBeTruthy();
+});
+
+test('Query tests', () => {
+  const queryModel = ModelRepository.resolve(QuerySchema.$id!);
+  const queryData: Query = {
+    collection: 'to-do',
+    columns: ['isDone', 'Description'],
+    criteria: ['country', 'in', ['USA', 'Japan']]
+  };
+  const collection = queryModel.create(queryData);
+  expect(getSnapshot(collection)).toMatchTastyShot('query-store');
   expect(true).toBeTruthy();
 });

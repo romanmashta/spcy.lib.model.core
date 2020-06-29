@@ -1,9 +1,7 @@
-import { BooleanType, NullType, NumberType, StringType, TypeInfo } from '@spcy/lib.core.reflection';
+export type Statement = string | number | boolean | null | Statement[];
 
-export type Statement = StringType | NumberType | BooleanType | NullType | Statement[];
-
-export interface QueryModel {
+export interface Query {
   collection: string;
-  columns: TypeInfo;
-  criteria: Statement[];
+  columns?: string[];
+  criteria?: Statement[];
 }
