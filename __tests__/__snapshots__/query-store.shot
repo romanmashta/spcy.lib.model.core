@@ -3,10 +3,6 @@
 exports[`Query tests 1`] = `
 {
   "collection": "to-do",
-  "columns": [
-    "isDone",
-    "Description"
-  ],
   "criteria": [
     "country",
     "in",

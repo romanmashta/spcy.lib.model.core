@@ -1,2 +1,2 @@
-export * from './collection.model';
-export * from './query.model';
+export * from './store/collection.model';
+export * from './store/query.model';

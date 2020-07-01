@@ -33,12 +33,6 @@ export const QuerySchema: TypeInfo = {
     collection: {
       type: 'string'
     },
-    columns: {
-      type: 'array',
-      items: {
-        type: 'string'
-      }
-    },
     criteria: {
       type: 'array',
       items: {
