@@ -1,2 +1,1 @@
-export * from './store/collection.model';
-export * from './store/query.model';
+export * from './index.model';

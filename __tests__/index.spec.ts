@@ -16,7 +16,6 @@ test('Collection tests', () => {
   };
   const collection = collectionModel.create(collectionData);
   expect(getSnapshot(collection)).toMatchTastyShot('collection');
-  expect(true).toBeTruthy();
 });
 
 test('Object store tests', () => {
@@ -39,7 +38,6 @@ test('Object store tests', () => {
   };
   const collection = objectStoreModel.create(storeData);
   expect(getSnapshot(collection)).toMatchTastyShot('object-store');
-  expect(true).toBeTruthy();
 });
 
 test('Query tests', () => {
@@ -50,5 +48,4 @@ test('Query tests', () => {
   };
   const collection = queryModel.create(queryData);
   expect(getSnapshot(collection)).toMatchTastyShot('query-store');
-  expect(true).toBeTruthy();
 });

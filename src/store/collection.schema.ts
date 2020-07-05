@@ -1,22 +1,21 @@
-import { TypeInfo, Module, SchemaRepository } from '@spcy/lib.core.reflection';
+import { TypeInfo, Module } from '@spcy/lib.core.reflection';
 
-export const ObjectStoreSchema: TypeInfo = {
-  $id: '#/$defs/ObjectStore',
+const ObjectStore: TypeInfo = {
+  $id: 'ObjectStore',
   type: 'object',
   required: ['collections'],
   properties: {
     collections: {
       type: 'array',
       items: {
-        $ref: '#/$defs/Collection'
+        $ref: 'Collection'
       }
     }
   }
 };
 
-SchemaRepository.register(ObjectStoreSchema);
-export const CollectionSchema: TypeInfo = {
-  $id: '#/$defs/Collection',
+const Collection: TypeInfo = {
+  $id: 'Collection',
   type: 'object',
   required: ['name', 'type'],
   properties: {
@@ -27,16 +26,15 @@ export const CollectionSchema: TypeInfo = {
       type: 'string'
     },
     type: {
-      $ref: '#/$defs/TypeInfo'
+      $ref: 'TypeInfo'
     }
   }
 };
 
-SchemaRepository.register(CollectionSchema);
-
-export const MetaSchema: Module = {
+export const CollectionSchema: Module = {
+  $id: '@spcy/lib.model.core',
   $defs: {
-    ObjectStore: ObjectStoreSchema,
-    Collection: CollectionSchema
+    ObjectStore,
+    Collection
   }
 };

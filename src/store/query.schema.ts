@@ -1,7 +1,7 @@
-import { TypeInfo, Module, SchemaRepository } from '@spcy/lib.core.reflection';
+import { TypeInfo, Module } from '@spcy/lib.core.reflection';
 
-export const StatementSchema: TypeInfo = {
-  $id: '#/$defs/Statement',
+const Statement: TypeInfo = {
+  $id: 'Statement',
   oneOf: [
     {
       type: 'string'
@@ -18,15 +18,14 @@ export const StatementSchema: TypeInfo = {
     {
       type: 'array',
       items: {
-        $ref: '#/$defs/Statement'
+        $ref: 'Statement'
       }
     }
   ]
 };
 
-SchemaRepository.register(StatementSchema);
-export const QuerySchema: TypeInfo = {
-  $id: '#/$defs/Query',
+const Query: TypeInfo = {
+  $id: 'Query',
   type: 'object',
   required: ['collection'],
   properties: {
@@ -36,17 +35,16 @@ export const QuerySchema: TypeInfo = {
     criteria: {
       type: 'array',
       items: {
-        $ref: '#/$defs/Statement'
+        $ref: 'Statement'
       }
     }
   }
 };
 
-SchemaRepository.register(QuerySchema);
-
-export const MetaSchema: Module = {
+export const QuerySchema: Module = {
+  $id: '@spcy/lib.model.core',
   $defs: {
-    Statement: StatementSchema,
-    Query: QuerySchema
+    Statement,
+    Query
   }
 };

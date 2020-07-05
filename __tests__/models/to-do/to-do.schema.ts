@@ -1,7 +1,7 @@
-import { TypeInfo, Module, SchemaRepository } from '@spcy/lib.core.reflection';
+import { TypeInfo, Module } from '@spcy/lib.core.reflection';
 
-export const ToDoSchema: TypeInfo = {
-  $id: '#/$defs/ToDo',
+const ToDo: TypeInfo = {
+  $id: 'ToDo',
   type: 'object',
   required: ['isDone'],
   properties: {
@@ -14,9 +14,8 @@ export const ToDoSchema: TypeInfo = {
   }
 };
 
-SchemaRepository.register(ToDoSchema);
-export const UserSchema: TypeInfo = {
-  $id: '#/$defs/User',
+const User: TypeInfo = {
+  $id: 'User',
   type: 'object',
   required: ['username'],
   properties: {
@@ -26,11 +25,10 @@ export const UserSchema: TypeInfo = {
   }
 };
 
-SchemaRepository.register(UserSchema);
-
-export const MetaSchema: Module = {
+export const ToDoSchema: Module = {
+  $id: '@spcy/lib.model.core',
   $defs: {
-    ToDo: ToDoSchema,
-    User: UserSchema
+    ToDo,
+    User
   }
 };
