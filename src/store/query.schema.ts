@@ -1,6 +1,9 @@
-import { TypeInfo, Module } from '@spcy/lib.core.reflection';
+import * as r from '@spcy/lib.core.reflection';
+import * as m from './query.model';
 
-const Statement: TypeInfo = {
+const PackageName = 'lib.model.core';
+
+const StatementType: r.TypeInfo = {
   $id: 'Statement',
   oneOf: [
     {
@@ -23,8 +26,12 @@ const Statement: TypeInfo = {
     }
   ]
 };
-
-const Query: TypeInfo = {
+const Statement: r.Prototype<m.Statement> = {
+  id: StatementType.$id,
+  package: PackageName,
+  typeInfo: StatementType
+};
+const QueryType: r.TypeInfo = {
   $id: 'Query',
   type: 'object',
   required: ['collection'],
@@ -40,11 +47,21 @@ const Query: TypeInfo = {
     }
   }
 };
+const Query: r.Prototype<m.Query> = {
+  id: QueryType.$id,
+  package: PackageName,
+  typeInfo: QueryType
+};
 
-export const QuerySchema: Module = {
-  $id: '@spcy/lib.model.core',
+export const QueryModule: r.Module = {
+  $id: PackageName,
   $defs: {
-    Statement,
-    Query
+    Statement: StatementType,
+    Query: QueryType
   }
+};
+
+export const Types = {
+  Statement,
+  Query
 };

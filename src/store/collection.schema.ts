@@ -1,6 +1,9 @@
-import { TypeInfo, Module } from '@spcy/lib.core.reflection';
+import * as r from '@spcy/lib.core.reflection';
+import * as m from './collection.model';
 
-const ObjectStore: TypeInfo = {
+const PackageName = 'lib.model.core';
+
+const ObjectStoreType: r.TypeInfo = {
   $id: 'ObjectStore',
   type: 'object',
   required: ['collections'],
@@ -13,28 +16,39 @@ const ObjectStore: TypeInfo = {
     }
   }
 };
-
-const Collection: TypeInfo = {
+const ObjectStore: r.Prototype<m.ObjectStore> = {
+  id: ObjectStoreType.$id,
+  package: PackageName,
+  typeInfo: ObjectStoreType
+};
+const CollectionType: r.TypeInfo = {
   $id: 'Collection',
   type: 'object',
-  required: ['name', 'type'],
+  required: ['name'],
   properties: {
     name: {
       type: 'string'
     },
     icon: {
       type: 'string'
-    },
-    type: {
-      $ref: 'TypeInfo'
     }
   }
 };
+const Collection: r.Prototype<m.Collection> = {
+  id: CollectionType.$id,
+  package: PackageName,
+  typeInfo: CollectionType
+};
 
-export const CollectionSchema: Module = {
-  $id: '@spcy/lib.model.core',
+export const CollectionModule: r.Module = {
+  $id: PackageName,
   $defs: {
-    ObjectStore,
-    Collection
+    ObjectStore: ObjectStoreType,
+    Collection: CollectionType
   }
+};
+
+export const Types = {
+  ObjectStore,
+  Collection
 };

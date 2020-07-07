@@ -1,11 +1,18 @@
-import { Module } from '@spcy/lib.core.reflection';
-import { CollectionSchema } from './collection.schema';
-import { QuerySchema } from './query.schema';
+import * as r from '@spcy/lib.core.reflection';
+import { CollectionModule, Types as CollectionTypes } from './collection.schema';
+import { QueryModule, Types as QueryTypes } from './query.schema';
 
-export const IndexSchema: Module = {
-  $id: '@spcy/lib.model.core',
+const PackageName = 'lib.model.core';
+
+export const IndexModule: r.Module = {
+  $id: PackageName,
   $defs: {
-    ...CollectionSchema.$defs,
-    ...QuerySchema.$defs
+    ...CollectionModule.$defs,
+    ...QueryModule.$defs
   }
+};
+
+export const Types = {
+  ...CollectionTypes,
+  ...QueryTypes
 };

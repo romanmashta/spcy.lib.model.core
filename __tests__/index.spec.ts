@@ -1,51 +1,40 @@
 import '@spcy/lib.dev.tasty';
-import { ModelRepository } from '@spcy/lib.core.mst-model';
+import { SchemaRepository, Types as ReflectionTypes } from '@spcy/lib.core.reflection';
+import { createInstance } from '@spcy/lib.core.mst-model';
 import { getSnapshot } from '@spcy/pub.mobx-state-tree';
-import { CollectionSchema, ObjectStoreSchema } from '../src/store/collection.schema';
-import { Collection, ObjectStore, Query } from '../src';
-import { ToDoSchema, UserSchema } from './models/to-do/to-do.schema';
-import { QuerySchema } from '../src/store/query.schema';
+import { Types as ToDoTypes } from './models/to-do/index.schema';
+import { Types as CoreTypes } from '../src';
+
+SchemaRepository.registerTypes(ReflectionTypes);
+SchemaRepository.registerTypes(ToDoTypes);
+SchemaRepository.registerTypes(CoreTypes);
 
 test('Collection tests', () => {
-  const collectionModel = ModelRepository.resolve(CollectionSchema.$id!);
-  const collectionData: Collection = {
-    name: 'to-do',
-    type: {
-      $ref: ToDoSchema.$id!
-    }
-  };
-  const collection = collectionModel.create(collectionData);
-  expect(getSnapshot(collection)).toMatchTastyShot('collection');
+  const todoCollection = createInstance(CoreTypes.Collection, {
+    name: 'to-do'
+  });
+
+  expect(getSnapshot(todoCollection)).toMatchTastyShot('collection');
 });
 
 test('Object store tests', () => {
-  const objectStoreModel = ModelRepository.resolve(ObjectStoreSchema.$id!);
-  const storeData: ObjectStore = {
+  const objectStore = createInstance(CoreTypes.ObjectStore, {
     collections: [
       {
-        name: 'to-do',
-        type: {
-          $ref: ToDoSchema.$id!
-        }
+        name: 'to-do'
       },
       {
-        name: 'users',
-        type: {
-          $ref: UserSchema.$id!
-        }
+        name: 'users'
       }
     ]
-  };
-  const collection = objectStoreModel.create(storeData);
-  expect(getSnapshot(collection)).toMatchTastyShot('object-store');
+  });
+  expect(getSnapshot(objectStore)).toMatchTastyShot('object-store');
 });
 
 test('Query tests', () => {
-  const queryModel = ModelRepository.resolve(QuerySchema.$id!);
-  const queryData: Query = {
+  const query = createInstance(CoreTypes.Query, {
     collection: 'to-do',
     criteria: ['country', 'in', ['USA', 'Japan']]
-  };
-  const collection = queryModel.create(queryData);
-  expect(getSnapshot(collection)).toMatchTastyShot('query-store');
+  });
+  expect(getSnapshot(query)).toMatchTastyShot('query-store');
 });
