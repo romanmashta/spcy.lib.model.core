@@ -27,13 +27,17 @@ const CollectionType: r.TypeInfo = {
   $id: 'Collection',
   $package: 'lib.model.core',
   type: 'object',
-  required: ['name'],
+  required: ['name', 'type'],
   properties: {
     name: {
       type: 'string'
     },
     icon: {
       type: 'string'
+    },
+    type: {
+      $ref: 'TypeInfo',
+      $refPackage: 'lib.core.reflection'
     }
   }
 };

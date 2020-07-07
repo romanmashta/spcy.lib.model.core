@@ -1,7 +1,6 @@
 import '@spcy/lib.dev.tasty';
 import { SchemaRepository, Types as ReflectionTypes } from '@spcy/lib.core.reflection';
-import { createInstance } from '@spcy/lib.core.mst-model';
-import { getSnapshot } from '@spcy/pub.mobx-state-tree';
+import { createInstance, getData } from '@spcy/lib.core.mst-model';
 import { Types as ToDoTypes } from './models/to-do/index.schema';
 import { Types as CoreTypes } from '../src';
 
@@ -9,26 +8,43 @@ SchemaRepository.registerTypes(ReflectionTypes);
 SchemaRepository.registerTypes(ToDoTypes);
 SchemaRepository.registerTypes(CoreTypes);
 
-test('Collection tests', () => {
+test('Collection with inline type tests', () => {
   const todoCollection = createInstance(CoreTypes.Collection, {
-    name: 'to-do'
+    name: 'to-do',
+    type: {
+      type: 'object',
+      properties: {
+        name: {
+          type: 'string'
+        }
+      }
+    }
   });
+  expect(getData(todoCollection)).toMatchTastyShot('collection inline');
+});
 
-  expect(getSnapshot(todoCollection)).toMatchTastyShot('collection');
+test('Collection with type ref tests', () => {
+  const todoCollection = createInstance(CoreTypes.Collection, {
+    name: 'users',
+    type: ToDoTypes.User
+  });
+  expect(getData(todoCollection)).toMatchTastyShot('collection typeref');
 });
 
 test('Object store tests', () => {
   const objectStore = createInstance(CoreTypes.ObjectStore, {
     collections: [
       {
-        name: 'to-do'
+        name: 'to-do',
+        type: ToDoTypes.ToDo
       },
       {
-        name: 'users'
+        name: 'users',
+        type: ToDoTypes.User
       }
     ]
   });
-  expect(getSnapshot(objectStore)).toMatchTastyShot('object-store');
+  expect(getData(objectStore)).toMatchTastyShot('object-store');
 });
 
 test('Query tests', () => {
@@ -36,5 +52,5 @@ test('Query tests', () => {
     collection: 'to-do',
     criteria: ['country', 'in', ['USA', 'Japan']]
   });
-  expect(getSnapshot(query)).toMatchTastyShot('query-store');
+  expect(getData(query)).toMatchTastyShot('query-store');
 });

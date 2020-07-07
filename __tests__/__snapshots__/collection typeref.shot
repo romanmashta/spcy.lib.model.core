@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Collection with type ref tests 1`] = `
+{
+  "name": "users",
+  "type": {
+    "$ref": "User",
+    "$refPackage": "lib.model.core"
+  }
+}
+`;

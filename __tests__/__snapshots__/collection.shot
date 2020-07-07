@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Collection tests 1`] = `
-{
-  "name": "to-do"
-}
-`;

@@ -4,10 +4,18 @@ exports[`Object store tests 1`] = `
 {
   "collections": [
     {
-      "name": "to-do"
+      "name": "to-do",
+      "type": {
+        "$ref": "ToDo",
+        "$refPackage": "lib.model.core"
+      }
     },
     {
-      "name": "users"
+      "name": "users",
+      "type": {
+        "$ref": "User",
+        "$refPackage": "lib.model.core"
+      }
     }
   ]
 }

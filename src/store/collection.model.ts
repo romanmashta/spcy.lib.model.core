@@ -7,4 +7,5 @@ export interface ObjectStore {
 export interface Collection {
   name: string;
   icon?: string;
+  type: TypeInfo;
 }
