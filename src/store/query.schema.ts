@@ -1,10 +1,9 @@
 import * as r from '@spcy/lib.core.reflection';
 import * as m from './query.model';
 
-const PackageName = 'lib.model.core';
-
 const StatementType: r.TypeInfo = {
   $id: 'Statement',
+  $package: 'lib.model.core',
   oneOf: [
     {
       type: 'string'
@@ -21,18 +20,22 @@ const StatementType: r.TypeInfo = {
     {
       type: 'array',
       items: {
-        $ref: 'Statement'
+        $ref: 'Statement',
+        $refPackage: 'lib.model.core'
       }
     }
   ]
 };
+
 const Statement: r.Prototype<m.Statement> = {
-  id: StatementType.$id,
-  package: PackageName,
+  $ref: StatementType.$id!,
+  $refPackage: StatementType.$package!,
   typeInfo: StatementType
 };
+
 const QueryType: r.TypeInfo = {
   $id: 'Query',
+  $package: 'lib.model.core',
   type: 'object',
   required: ['collection'],
   properties: {
@@ -42,19 +45,21 @@ const QueryType: r.TypeInfo = {
     criteria: {
       type: 'array',
       items: {
-        $ref: 'Statement'
+        $ref: 'Statement',
+        $refPackage: 'lib.model.core'
       }
     }
   }
 };
+
 const Query: r.Prototype<m.Query> = {
-  id: QueryType.$id,
-  package: PackageName,
+  $ref: QueryType.$id!,
+  $refPackage: QueryType.$package!,
   typeInfo: QueryType
 };
 
 export const QueryModule: r.Module = {
-  $id: PackageName,
+  $id: 'lib.model.core',
   $defs: {
     Statement: StatementType,
     Query: QueryType

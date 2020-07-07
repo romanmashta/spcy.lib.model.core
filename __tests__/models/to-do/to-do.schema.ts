@@ -1,10 +1,9 @@
 import * as r from '@spcy/lib.core.reflection';
 import * as m from './to-do.model';
 
-const PackageName = 'lib.model.core';
-
 const ToDoType: r.TypeInfo = {
   $id: 'ToDo',
+  $package: 'lib.model.core',
   type: 'object',
   required: ['isDone'],
   properties: {
@@ -16,13 +15,16 @@ const ToDoType: r.TypeInfo = {
     }
   }
 };
+
 const ToDo: r.Prototype<m.ToDo> = {
-  id: ToDoType.$id,
-  package: PackageName,
+  $ref: ToDoType.$id!,
+  $refPackage: ToDoType.$package!,
   typeInfo: ToDoType
 };
+
 const UserType: r.TypeInfo = {
   $id: 'User',
+  $package: 'lib.model.core',
   type: 'object',
   required: ['username'],
   properties: {
@@ -31,14 +33,15 @@ const UserType: r.TypeInfo = {
     }
   }
 };
+
 const User: r.Prototype<m.User> = {
-  id: UserType.$id,
-  package: PackageName,
+  $ref: UserType.$id!,
+  $refPackage: UserType.$package!,
   typeInfo: UserType
 };
 
 export const ToDoModule: r.Module = {
-  $id: PackageName,
+  $id: 'lib.model.core',
   $defs: {
     ToDo: ToDoType,
     User: UserType
