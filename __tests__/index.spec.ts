@@ -3,6 +3,7 @@ import { SchemaRepository, Types as ReflectionTypes } from '@spcy/lib.core.refle
 import { createInstance, getData } from '@spcy/lib.core.mst-model';
 import { Types as ToDoTypes } from './models/to-do/index.schema';
 import { Types as CoreTypes } from '../src';
+import { User } from './models/to-do/to-do.model';
 
 SchemaRepository.registerTypes(ReflectionTypes);
 SchemaRepository.registerTypes(ToDoTypes);
@@ -48,9 +49,13 @@ test('Object store tests', () => {
 });
 
 test('Query tests', () => {
-  const query = createInstance(CoreTypes.Query, {
-    collection: 'to-do',
-    criteria: ['country', 'in', ['USA', 'Japan']]
+  const query = createInstance(ToDoTypes.Late<User>(), {
+    resolving: false,
+    value: {
+      username: 'hello'
+    }
   });
+  query.resolve();
+  query.value
   expect(getData(query)).toMatchTastyShot('query-store');
 });
