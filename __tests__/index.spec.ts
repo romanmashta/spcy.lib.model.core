@@ -47,15 +47,3 @@ test('Object store tests', () => {
   });
   expect(getData(objectStore)).toMatchTastyShot('object-store');
 });
-
-test('Query tests', () => {
-  const query = createInstance(ToDoTypes.Late<User>(), {
-    resolving: false,
-    value: {
-      username: 'hello'
-    }
-  });
-  query.resolve();
-  query.value
-  expect(getData(query)).toMatchTastyShot('query-store');
-});

@@ -45,6 +45,7 @@ const FooCollections: r.Prototype<m.FooCollections> = {
 const LateType: r.TypeInfo = {
   $id: 'Late',
   $package: 'lib.model.core',
+  $typeArguments: ['T'],
   type: 'object',
   required: ['resolving', 'value'],
   properties: {
@@ -58,15 +59,16 @@ const LateType: r.TypeInfo = {
   }
 };
 
-const Late = <T>(): r.Prototype<m.Late<T>> => ({
+const Late: r.PrototypeInfo = {
   $ref: LateType.$id!,
   $refPackage: LateType.$package!,
   typeInfo: LateType
-});
+};
 
 const AppBoxType: r.TypeInfo = {
   $id: 'AppBox',
   $package: 'lib.model.core',
+  $typeArguments: ['T'],
   type: 'object',
   required: ['name', 'collections'],
   properties: {
@@ -80,12 +82,13 @@ const AppBoxType: r.TypeInfo = {
         {
           type: 'string'
         }
-      ]
+      ],
+      $refArguments: 'string'
     }
   }
 };
 
-const AppBox: r.Prototype<m.AppBox> = {
+const AppBox: r.PrototypeInfo = {
   $ref: AppBoxType.$id!,
   $refPackage: AppBoxType.$package!,
   typeInfo: AppBoxType
