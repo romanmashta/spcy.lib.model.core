@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Seeds tests 1`] = `
+{
+  "collections": {
+    "collections": {
+      "name": "Collection",
+      "type": {
+        "$ref": "Collection",
+        "$refPackage": "lib.model.core"
+      }
+    },
+    "tasks": {
+      "name": "Tasks",
+      "type": {
+        "$ref": "ToDo",
+        "$refPackage": "lib.model.core"
+      }
+    },
+    "users": {
+      "name": "Users",
+      "type": {
+        "$ref": "User",
+        "$refPackage": "lib.model.core"
+      }
+    },
+    "roles": {
+      "name": "Role",
+      "type": {
+        "$ref": "Role",
+        "$refPackage": "lib.model.core"
+      }
+    }
+  },
+  "roles": {
+    "admin": {
+      "name": "admin"
+    },
+    "guest": {
+      "name": "guest"
+    }
+  },
+  "users": {
+    "bill": {
+      "username": "bill",
+      "roles": [
+        {
+          "name": "admin"
+        },
+        {
+          "name": "guest"
+        }
+      ]
+    },
+    "joe": {
+      "username": "joe",
+      "roles": [
+        {
+          "name": "admin"
+        },
+        {
+          "name": "guest"
+        }
+      ]
+    }
+  },
+  "tasks": {
+    "compile": {
+      "isDone": false,
+      "description": "Compile Code",
+      "user": {
+        "$ref": "users/bill"
+      }
+    },
+    "deploy": {
+      "isDone": false,
+      "description": "Deploy Code",
+      "user": {
+        "$ref": "users/joe"
+      }
+    }
+  }
+}
+`;

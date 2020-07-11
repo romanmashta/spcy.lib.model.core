@@ -14,8 +14,7 @@ const CollectionType: r.TypeInfo = {
 };
 
 const Collection: r.Prototype<m.Collection> = {
-  $ref: CollectionType.$id!,
-  $refPackage: CollectionType.$package!,
+  ref: { $ref: CollectionType.$id!, $refPackage: CollectionType.$package! },
   typeInfo: CollectionType
 };
 
@@ -37,8 +36,7 @@ const FooCollectionsType: r.TypeInfo = {
 };
 
 const FooCollections: r.Prototype<m.FooCollections> = {
-  $ref: FooCollectionsType.$id!,
-  $refPackage: FooCollectionsType.$package!,
+  ref: { $ref: FooCollectionsType.$id!, $refPackage: FooCollectionsType.$package! },
   typeInfo: FooCollectionsType
 };
 
@@ -60,8 +58,7 @@ const LateType: r.TypeInfo = {
 };
 
 const Late: r.PrototypeInfo = {
-  $ref: LateType.$id!,
-  $refPackage: LateType.$package!,
+  ref: { $ref: LateType.$id!, $refPackage: LateType.$package! },
   typeInfo: LateType
 };
 
@@ -89,8 +86,7 @@ const AppBoxType: r.TypeInfo = {
 };
 
 const AppBox: r.PrototypeInfo = {
-  $ref: AppBoxType.$id!,
-  $refPackage: AppBoxType.$package!,
+  ref: { $ref: AppBoxType.$id!, $refPackage: AppBoxType.$package! },
   typeInfo: AppBoxType
 };
 

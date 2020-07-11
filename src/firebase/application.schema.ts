@@ -32,8 +32,7 @@ const FirebaseConfigType: r.TypeInfo = {
 };
 
 const FirebaseConfig: r.Prototype<m.FirebaseConfig> = {
-  $ref: FirebaseConfigType.$id!,
-  $refPackage: FirebaseConfigType.$package!,
+  ref: { $ref: FirebaseConfigType.$id!, $refPackage: FirebaseConfigType.$package! },
   typeInfo: FirebaseConfigType
 };
 
@@ -54,8 +53,7 @@ const FirebaseAppType: r.TypeInfo = {
 };
 
 const FirebaseApp: r.Prototype<m.FirebaseApp> = {
-  $ref: FirebaseAppType.$id!,
-  $refPackage: FirebaseAppType.$package!,
+  ref: { $ref: FirebaseAppType.$id!, $refPackage: FirebaseAppType.$package! },
   typeInfo: FirebaseAppType
 };
 

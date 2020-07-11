@@ -28,8 +28,7 @@ const StatementType: r.TypeInfo = {
 };
 
 const Statement: r.Prototype<m.Statement> = {
-  $ref: StatementType.$id!,
-  $refPackage: StatementType.$package!,
+  ref: { $ref: StatementType.$id!, $refPackage: StatementType.$package! },
   typeInfo: StatementType
 };
 
@@ -53,8 +52,7 @@ const QueryType: r.TypeInfo = {
 };
 
 const Query: r.Prototype<m.Query> = {
-  $ref: QueryType.$id!,
-  $refPackage: QueryType.$package!,
+  ref: { $ref: QueryType.$id!, $refPackage: QueryType.$package! },
   typeInfo: QueryType
 };
 
