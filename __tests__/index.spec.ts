@@ -1,7 +1,6 @@
 import '@spcy/lib.dev.tasty';
 import { SchemaRepository, Types as ReflectionTypes, Prototype } from '@spcy/lib.core.reflection';
 import { createInstance, getData } from '@spcy/lib.core.mst-model';
-import * as ToDo from './models/to-do/index.model';
 import { Types as ToDoTypes } from './models/to-do/index.schema';
 import * as Core from '../src';
 import { objRef, TypedCollection } from '../src';
@@ -57,12 +56,13 @@ test('Seeds tests', () => {
 
   const roles = Core.createSet(appCollections.roles, {
     admin: { name: 'admin' },
+    user: { name: 'user' },
     guest: { name: 'guest' }
   });
 
   const users = Core.createSet(appCollections.users, {
-    bill: { username: 'bill', roles: [roles.admin, roles.guest] },
-    joe: { username: 'joe', roles: [roles.admin, roles.guest] }
+    bill: { username: 'bill', roles: [roles.admin] },
+    joe: { username: 'joe', roles: [roles.user] }
   });
 
   const tasks = Core.createSet(appCollections.tasks, {

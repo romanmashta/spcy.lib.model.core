@@ -1,3 +1,5 @@
+import { Collection } from '../store/index.model';
+
 export interface FirebaseConfig {
   apiKey: string;
   authDomain: string;
@@ -11,4 +13,12 @@ export interface FirebaseConfig {
 export interface FirebaseApp {
   name: string;
   config: FirebaseConfig;
+  collections?: {
+    [name: string]: Collection;
+  };
+}
+
+export interface Activable {
+  activate(): void;
+  deactivate(): void;
 }

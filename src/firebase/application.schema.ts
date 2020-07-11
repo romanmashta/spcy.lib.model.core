@@ -48,6 +48,13 @@ const FirebaseAppType: r.TypeInfo = {
     config: {
       $ref: 'FirebaseConfig',
       $refPackage: 'lib.model.core'
+    },
+    collections: {
+      type: 'object',
+      additionalProperties: {
+        $ref: 'Collection',
+        $refPackage: 'lib.model.core'
+      }
     }
   }
 };
@@ -57,15 +64,28 @@ const FirebaseApp: r.Prototype<m.FirebaseApp> = {
   typeInfo: FirebaseAppType
 };
 
+const ActivableType: r.TypeInfo = {
+  $id: 'Activable',
+  $package: 'lib.model.core',
+  type: 'object'
+};
+
+const Activable: r.Prototype<m.Activable> = {
+  ref: { $ref: ActivableType.$id!, $refPackage: ActivableType.$package! },
+  typeInfo: ActivableType
+};
+
 export const ApplicationModule: r.Module = {
   $id: 'lib.model.core',
   $defs: {
     FirebaseConfig: FirebaseConfigType,
-    FirebaseApp: FirebaseAppType
+    FirebaseApp: FirebaseAppType,
+    Activable: ActivableType
   }
 };
 
 export const Types = {
   FirebaseConfig,
-  FirebaseApp
+  FirebaseApp,
+  Activable
 };

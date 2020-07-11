@@ -36,6 +36,9 @@ exports[`Seeds tests 1`] = `
     "admin": {
       "name": "admin"
     },
+    "user": {
+      "name": "user"
+    },
     "guest": {
       "name": "guest"
     }
@@ -46,9 +49,6 @@ exports[`Seeds tests 1`] = `
       "roles": [
         {
           "name": "admin"
-        },
-        {
-          "name": "guest"
         }
       ]
     },
@@ -56,10 +56,7 @@ exports[`Seeds tests 1`] = `
       "username": "joe",
       "roles": [
         {
-          "name": "admin"
-        },
-        {
-          "name": "guest"
+          "name": "user"
         }
       ]
     }
