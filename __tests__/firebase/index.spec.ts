@@ -3,7 +3,7 @@ import '@spcy/lib.dev.tasty';
 import * as Reflection from '@spcy/lib.core.reflection';
 import { createInstance, TypedObject } from '@spcy/lib.core.mst-model';
 import * as firebase from 'firebase';
-import { getType, IMapType, IMSTMap } from '@spcy/pub.mobx-state-tree';
+import { getType } from '@spcy/pub.mobx-state-tree';
 import * as Core from '../../src';
 import { Types as ToDoTypes } from '../models/to-do/index.schema';
 
@@ -123,6 +123,10 @@ class FirebaseAppController implements Core.Activable {
     });
   }
 }
+
+export interface Model {}
+
+export interface Component {}
 
 const controllersMap: any = {};
 
