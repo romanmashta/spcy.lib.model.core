@@ -124,9 +124,14 @@ class FirebaseAppController implements Core.Activable {
   }
 }
 
-export interface Model {}
+export interface Model {
+  query<T>(type: Reflection.Prototype<T>);
+  detach<T>(component: T);
+}
 
-export interface Component {}
+export interface Component<T> {
+  model: T;
+}
 
 const controllersMap: any = {};
 
