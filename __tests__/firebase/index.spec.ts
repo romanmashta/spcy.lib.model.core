@@ -1,11 +1,11 @@
 import _ from 'lodash';
 import '@spcy/lib.dev.tasty';
 import * as Reflection from '@spcy/lib.core.reflection';
-import { createInstance, TypedObject } from '@spcy/lib.core.mst-model';
+import { createInstance } from '@spcy/lib.core.mst-model';
 import * as firebase from 'firebase';
-import { getType } from '@spcy/pub.mobx-state-tree';
 import * as Core from '../../src';
 import { Types as ToDoTypes } from '../models/to-do/index.schema';
+import { queryInterface, registerController } from '../../src';
 
 Reflection.SchemaRepository.registerTypes(Reflection.Types);
 Reflection.SchemaRepository.registerTypes(ToDoTypes);
@@ -19,7 +19,15 @@ const collection = <T>(
 
 const app = createInstance(Core.Types.FirebaseApp, {
   name: 'Sandbox',
-  config: {}
+  config: {
+    apiKey: 'AIzaSyASh83T79DJ1UI9hEJ61oq0HdS1O40MzNk',
+    authDomain: 'mono-space-d38be.firebaseapp.com',
+    databaseURL: 'https://mono-space-d38be.firebaseio.com',
+    projectId: 'mono-space-d38be',
+    storageBucket: 'mono-space-d38be.appspot.com',
+    messagingSenderId: '441937998030',
+    appId: '1:441937998030:web:fdba428e92505aae8e609f'
+  }
 });
 
 test('Seed app', async done => {
@@ -124,41 +132,13 @@ class FirebaseAppController implements Core.Activable {
   }
 }
 
-export interface Model {
-  query<T>(type: Reflection.Prototype<T>);
-  detach<T>(component: T);
-}
-
-export interface Component<T> {
-  model: T;
-}
-
-const controllersMap: any = {};
-
-const registerController = <A, U>(
-  controllerClass: new (model: U) => A,
-  modelRef: Reflection.Prototype<U>,
-  interfaceRef: Reflection.PrototypeInfo
-) => {
-  const name = `${modelRef.ref.$refPackage}.${modelRef.ref.$ref}:${interfaceRef.ref.$refPackage}.${interfaceRef.ref.$ref}`;
-  controllersMap[name] = controllerClass;
-};
-
-const queryInterface = <A, T>(model: T, interfaceRef: Reflection.Prototype<A>): A => {
-  const objectWithType = (getType(model) as unknown) as TypedObject;
-  const objectTypeId = `${objectWithType.$typeInfo.$package}.${objectWithType.$typeInfo.$id}`;
-  const interfaceTypeId = `${interfaceRef.ref.$refPackage}.${interfaceRef.ref.$ref}`;
-  const ControllerClass = controllersMap[`${objectTypeId}:${interfaceTypeId}`];
-  return new ControllerClass(model) as A;
-};
-
 registerController(FirebaseAppController, Core.Types.FirebaseApp, Core.Types.Activable);
 
 test('Seed app', async () => {
   const appController = queryInterface(app, Core.Types.Activable);
   await appController.activate();
   console.log('activated');
-  const tasks = app.collections?.tasks;
+  const tasks = app.collections;
   console.log('collection roles', JSON.stringify(tasks, undefined, 2));
   await appController.deactivate();
   console.log('deactivated');
