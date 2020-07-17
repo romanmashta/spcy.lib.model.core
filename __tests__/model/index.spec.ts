@@ -1,9 +1,9 @@
 import '@spcy/lib.dev.tasty';
 import { SchemaRepository, Types as ReflectionTypes, Prototype } from '@spcy/lib.core.reflection';
 import { createInstance, getData } from '@spcy/lib.core.mst-model';
-import { Types as ToDoTypes } from './models/to-do/index.schema';
-import * as Core from '../src';
-import { objRef, TypedCollection } from '../src';
+import { Types as ToDoTypes } from './to-do/index.schema';
+import * as Core from '../../src';
+import { queryInterface, registerController } from '../../src';
 
 SchemaRepository.registerTypes(ReflectionTypes);
 SchemaRepository.registerTypes(ToDoTypes);
@@ -66,8 +66,8 @@ test('Seeds tests', () => {
   });
 
   const tasks = Core.createSet(appCollections.tasks, {
-    compile: { isDone: false, description: 'Compile Code', user: objRef(users.bill) },
-    deploy: { isDone: false, description: 'Deploy Code', user: objRef(users.joe) }
+    compile: { isDone: false, description: 'Compile Code', user: Core.objRef(users.bill) },
+    deploy: { isDone: false, description: 'Deploy Code', user: Core.objRef(users.joe) }
   });
 
   const seed = {
@@ -78,4 +78,28 @@ test('Seeds tests', () => {
   };
 
   expect(seed).toMatchTastyShot('collection seed');
+});
+
+class DummyUserController implements Core.Activable {
+  active = false;
+
+  activate(): void {
+    this.active = true;
+  }
+
+  deactivate(): void {
+    this.active = false;
+  }
+}
+
+registerController(DummyUserController, ToDoTypes.User, Core.Types.Activable);
+
+test('Query component for model', () => {
+  const user = createInstance(ToDoTypes.User, {
+    username: 'joe',
+    roles: []
+  });
+  const c1 = queryInterface(user, Core.Types.Activable);
+  const c2 = queryInterface(user, Core.Types.Activable);
+  expect(c1).toBe(c2);
 });

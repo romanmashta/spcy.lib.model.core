@@ -4,7 +4,7 @@ import * as Reflection from '@spcy/lib.core.reflection';
 import { createInstance } from '@spcy/lib.core.mst-model';
 import * as firebase from 'firebase';
 import * as Core from '../../src';
-import { Types as ToDoTypes } from '../models/to-do/index.schema';
+import { Types as ToDoTypes } from '../model/to-do/index.schema';
 import { queryInterface, registerController } from '../../src';
 
 Reflection.SchemaRepository.registerTypes(Reflection.Types);
