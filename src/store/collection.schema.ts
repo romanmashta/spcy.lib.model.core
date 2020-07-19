@@ -25,13 +25,49 @@ const Collection: r.Prototype<m.Collection> = {
   typeInfo: CollectionType
 };
 
+const CollectionWithTypeType: r.TypeInfo = {
+  $id: 'CollectionWithType',
+  $package: 'lib.model.core',
+  $typeArguments: ['T'],
+  allOf: [
+    {
+      $ref: 'Collection',
+      $refPackage: 'lib.model.core'
+    },
+    {
+      type: 'object',
+      required: ['collection'],
+      properties: {
+        collection: {
+          $ref: 'ReferenceSetWithType',
+          $refPackage: 'lib.core.reflection',
+          $arguments: [
+            {
+              $ref: 'T',
+              $refPackage: 'lib.model.core'
+            }
+          ],
+          $refArguments: 'lib.model.core.T'
+        }
+      }
+    }
+  ]
+};
+
+const CollectionWithType: r.PrototypeInfo = {
+  ref: { $ref: CollectionWithTypeType.$id!, $refPackage: CollectionWithTypeType.$package! },
+  typeInfo: CollectionWithTypeType
+};
+
 export const CollectionModule: r.Module = {
   $id: 'lib.model.core',
   $defs: {
-    Collection: CollectionType
+    Collection: CollectionType,
+    CollectionWithType: CollectionWithTypeType
   }
 };
 
 export const Types = {
-  Collection
+  Collection,
+  CollectionWithType
 };

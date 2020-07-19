@@ -96,6 +96,8 @@ test('Seed app', async done => {
 });
 
 test('Seed app 2', async done => {
+  done();
+  retuen;
   const appController = queryInterface(app, Core.Types.Activable);
   await appController.activate();
   console.log('activated');
