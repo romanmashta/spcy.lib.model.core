@@ -1,9 +1,9 @@
-import { Ref } from '../../../src/store';
+import { ReferenceWithType } from '@spcy/lib.core.reflection';
 
 export interface ToDo {
   isDone: boolean;
   description?: string;
-  user?: Ref<User>;
+  user?: ReferenceWithType<User>;
 }
 
 export interface User {

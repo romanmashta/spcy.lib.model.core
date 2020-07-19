@@ -3,13 +3,16 @@
 exports[`Collection with inline type tests 1`] = `
 {
   "name": "to-do",
-  "type": {
-    "type": "object",
-    "properties": {
-      "name": {
-        "type": "string"
+  "collection": {
+    "$type": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
       }
-    }
+    },
+    "objects": {}
   }
 }
 `;

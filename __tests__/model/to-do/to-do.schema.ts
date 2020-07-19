@@ -14,8 +14,8 @@ const ToDoType: r.TypeInfo = {
       type: 'string'
     },
     user: {
-      $ref: 'Ref',
-      $refPackage: 'lib.model.core',
+      $ref: 'ReferenceWithType',
+      $refPackage: 'lib.core.reflection',
       $arguments: [
         {
           $ref: 'User',

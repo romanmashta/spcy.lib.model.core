@@ -1,7 +1,11 @@
-import { TypeInfo } from '@spcy/lib.core.reflection';
+import { ReferenceSet, ReferenceSetWithType } from '@spcy/lib.core.reflection';
 
 export interface Collection {
   name: string;
   icon?: string;
-  type: TypeInfo;
+  collection: ReferenceSet;
+}
+
+export interface CollectionWithType<T> extends Collection {
+  collection: ReferenceSetWithType<T>;
 }

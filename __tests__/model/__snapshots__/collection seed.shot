@@ -1,34 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Seeds tests 1`] = `
+exports[`Seeds model tests 1`] = `
 {
   "collections": {
     "collections": {
       "name": "Collection",
-      "type": {
-        "$ref": "Collection",
-        "$refPackage": "lib.model.core"
+      "collection": {
+        "$type": {
+          "$ref": "Collection",
+          "$refPackage": "lib.model.core"
+        }
       }
     },
     "tasks": {
       "name": "Tasks",
-      "type": {
-        "$ref": "ToDo",
-        "$refPackage": "lib.model.core"
+      "collection": {
+        "$type": {
+          "$ref": "ToDo",
+          "$refPackage": "lib.model.core"
+        }
       }
     },
     "users": {
       "name": "Users",
-      "type": {
-        "$ref": "User",
-        "$refPackage": "lib.model.core"
+      "collection": {
+        "$type": {
+          "$ref": "User",
+          "$refPackage": "lib.model.core"
+        }
       }
     },
     "roles": {
       "name": "Role",
-      "type": {
-        "$ref": "Role",
-        "$refPackage": "lib.model.core"
+      "collection": {
+        "$type": {
+          "$ref": "Role",
+          "$refPackage": "lib.model.core"
+        }
       }
     }
   },

@@ -5,7 +5,7 @@ const CollectionType: r.TypeInfo = {
   $id: 'Collection',
   $package: 'lib.model.core',
   type: 'object',
-  required: ['name', 'type'],
+  required: ['name', 'collection'],
   properties: {
     name: {
       type: 'string'
@@ -13,8 +13,8 @@ const CollectionType: r.TypeInfo = {
     icon: {
       type: 'string'
     },
-    type: {
-      $ref: 'TypeInfo',
+    collection: {
+      $ref: 'ReferenceSet',
       $refPackage: 'lib.core.reflection'
     }
   }

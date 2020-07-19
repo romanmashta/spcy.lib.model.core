@@ -1,9 +1,9 @@
 import '@spcy/lib.dev.tasty';
-import { SchemaRepository, Types as ReflectionTypes, Prototype } from '@spcy/lib.core.reflection';
+import { SchemaRepository, Types as ReflectionTypes } from '@spcy/lib.core.reflection';
 import { createInstance, getData } from '@spcy/lib.core.mst-model';
 import { Types as ToDoTypes } from './to-do/index.schema';
 import * as Core from '../../src';
-import { queryInterface, registerController } from '../../src';
+import { collection, queryInterface, registerController } from '../../src';
 
 SchemaRepository.registerTypes(ReflectionTypes);
 SchemaRepository.registerTypes(ToDoTypes);
@@ -12,11 +12,13 @@ SchemaRepository.registerTypes(Core.Types);
 test('Collection with inline type tests', () => {
   const todoCollection = createInstance(Core.Types.Collection, {
     name: 'to-do',
-    type: {
-      type: 'object',
-      properties: {
-        name: {
-          type: 'string'
+    collection: {
+      $type: {
+        type: 'object',
+        properties: {
+          name: {
+            type: 'string'
+          }
         }
       }
     }
@@ -27,18 +29,14 @@ test('Collection with inline type tests', () => {
 test('Collection with type ref tests', () => {
   const todoCollection = createInstance(Core.Types.Collection, {
     name: 'users',
-    type: ToDoTypes.User.ref
+    collection: {
+      $type: ToDoTypes.User.ref
+    }
   });
   expect(getData(todoCollection)).toMatchTastyShot('collection typeref');
 });
 
-const collection = <T>(
-  name: string,
-  proto: Prototype<T>,
-  init: Partial<Core.Collection> = {}
-): Core.TypedCollection<T> => ({ name, type: proto.ref, ...init });
-
-test('Seeds tests', () => {
+test('Seeds model tests', () => {
   const coreCollections = {
     collections: collection('Collection', Core.Types.Collection)
   };

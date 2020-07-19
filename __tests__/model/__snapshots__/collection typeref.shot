@@ -3,9 +3,12 @@
 exports[`Collection with type ref tests 1`] = `
 {
   "name": "users",
-  "type": {
-    "$ref": "User",
-    "$refPackage": "lib.model.core"
+  "collection": {
+    "$type": {
+      "$ref": "User",
+      "$refPackage": "lib.model.core"
+    },
+    "objects": {}
   }
 }
 `;

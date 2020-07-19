@@ -34,6 +34,7 @@ export const queryInterface = <A, T>(model: T, interfaceRef: Reflection.Prototyp
   const objectWithType = (getType(model) as unknown) as Mst.ModelWithType;
   const objectTypeId = `${objectWithType.$typeInfo.$package}.${objectWithType.$typeInfo.$id}`;
   const ComponentClass = compnentsMap[`${objectTypeId}:${interfaceTypeId}`];
+
   const component = (new ComponentClass(model) as unknown) as Component<T>;
   components.set(interfaceTypeId, component);
   return (component as unknown) as A;

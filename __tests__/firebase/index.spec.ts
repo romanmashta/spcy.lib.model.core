@@ -4,23 +4,20 @@ import * as Reflection from '@spcy/lib.core.reflection';
 import { createInstance } from '@spcy/lib.core.mst-model';
 import * as firebase from 'firebase';
 import * as Core from '../../src';
+import { collection, queryInterface } from '../../src';
 import { Types as ToDoTypes } from '../model/to-do/index.schema';
-import { queryInterface, registerController } from '../../src';
+import { Types as AppTypes } from './app.schema';
+import { App } from './app.model';
 
 Reflection.SchemaRepository.registerTypes(Reflection.Types);
 Reflection.SchemaRepository.registerTypes(ToDoTypes);
 Reflection.SchemaRepository.registerTypes(Core.Types);
-
-const collection = <T>(
-  name: string,
-  proto: Reflection.Prototype<T>,
-  init: Partial<Core.Collection> = {}
-): Core.TypedCollection<T> => ({ name, type: proto.ref, ...init });
+Reflection.SchemaRepository.registerTypes(AppTypes);
 
 const app = createInstance(Core.Types.FirebaseApp, {
   name: 'Sandbox',
   config: {
-    apiKey: 'AIzaSyASh83T79DJ1UI9hEJ61oq0HdS1O40MzNk',
+    apiKey: process.env.FB_API_KEY!,
     authDomain: 'mono-space-d38be.firebaseapp.com',
     databaseURL: 'https://mono-space-d38be.firebaseio.com',
     projectId: 'mono-space-d38be',
@@ -98,48 +95,23 @@ test('Seed app', async done => {
   done();
 });
 
-class FirebaseAppController implements Core.Activable {
-  private model: Core.FirebaseApp;
-  private firebase?: firebase.app.App;
-  private db?: firebase.firestore.Firestore;
-
-  constructor(model: Core.FirebaseApp) {
-    this.model = model;
-  }
-
-  async activate() {
-    console.log('activate ', this.model.name);
-
-    this.firebase = firebase.initializeApp(this.model.config);
-    this.db = this.firebase.firestore();
-    await this.queryCollection();
-  }
-
-  async deactivate() {
-    console.log('deactivate', this.model.name);
-  }
-
-  async queryCollection() {
-    if (!this.db) return;
-
-    const data = await this.db.collection('collections').get();
-    const objects = data.docs.map(doc => [doc.id, doc.data()]);
-    const snapshot = _.fromPairs(objects);
-
-    this.model.patch(self => {
-      self.collections = snapshot;
-    });
-  }
-}
-
-registerController(FirebaseAppController, Core.Types.FirebaseApp, Core.Types.Activable);
-
-test('Seed app', async () => {
+test('Seed app 2', async done => {
   const appController = queryInterface(app, Core.Types.Activable);
   await appController.activate();
   console.log('activated');
-  const tasks = app.collections;
-  console.log('collection roles', JSON.stringify(tasks, undefined, 2));
+  const tApp = app as App;
+  const tasks = tApp.collections?.tasks;
+  const users = tApp.collections?.users;
+
+  const tasksController = queryInterface(tasks, Core.Types.Activable);
+  await tasksController.activate();
+  console.log('collection tasks', JSON.stringify(tasks, undefined, 2));
+
+  const usersController = queryInterface(users, Core.Types.Activable);
+  await usersController.activate();
+  console.log('collection users', JSON.stringify(users, undefined, 2));
+
   await appController.deactivate();
   console.log('deactivated');
+  done();
 });
