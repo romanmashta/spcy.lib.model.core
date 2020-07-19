@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import firebase from 'firebase';
-import * as Core from '../index';
+import * as Core from '../index.model';
+import { Types as CoreTypes } from '../index.schema';
 import { registerController } from '../controllers';
 
 export class FirebaseAppController implements Core.Activable {
@@ -13,16 +14,12 @@ export class FirebaseAppController implements Core.Activable {
   }
 
   async activate() {
-    console.log('activate ', this.model.name);
-
     this.firebase = firebase.initializeApp(this.model.config);
     this.db = this.firebase.firestore();
     await this.queryCollection();
   }
 
-  async deactivate() {
-    console.log('deactivate', this.model.name);
-  }
+  async deactivate() {}
 
   async queryCollection() {
     if (!this.db) return;
@@ -37,4 +34,4 @@ export class FirebaseAppController implements Core.Activable {
   }
 }
 
-registerController(FirebaseAppController, Core.Types.FirebaseApp, Core.Types.Activable);
+registerController(FirebaseAppController, CoreTypes.FirebaseApp, CoreTypes.Activable);

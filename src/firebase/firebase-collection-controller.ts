@@ -1,7 +1,8 @@
-import * as Core from '../index';
 import * as firebase from 'firebase';
 import * as mst from '@spcy/pub.mobx-state-tree';
 import _ from 'lodash';
+import * as Core from '../index.model';
+import { Types as CoreTypes } from '../index.schema';
 import { FirebaseAppController } from './firebase-app-controller';
 import { queryInterface, registerController } from '../controllers';
 
@@ -14,7 +15,7 @@ export class FirebaseCollectionController implements Core.Activable {
     this.model = model;
     const collections = mst.getParent(model);
     const fbApp = mst.getParent(collections) as Core.FirebaseApp;
-    const parentController = queryInterface(fbApp, Core.Types.Activable) as FirebaseAppController;
+    const parentController = queryInterface(fbApp, CoreTypes.Activable) as FirebaseAppController;
     this.db = parentController.db;
     this.collectionName = mst.getRelativePath(collections, model);
   }
@@ -41,4 +42,4 @@ export class FirebaseCollectionController implements Core.Activable {
   }
 }
 
-registerController(FirebaseCollectionController, Core.Types.Collection, Core.Types.Activable);
+registerController(FirebaseCollectionController, CoreTypes.Collection, CoreTypes.Activable);
