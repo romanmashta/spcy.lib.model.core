@@ -32,7 +32,10 @@ const FirebaseConfigType: r.TypeInfo = {
 };
 
 const FirebaseConfig: r.Prototype<m.FirebaseConfig> = {
-  ref: { $ref: FirebaseConfigType.$id!, $refPackage: FirebaseConfigType.$package! },
+  ref: {
+    $ref: FirebaseConfigType.$id!,
+    $refPackage: FirebaseConfigType.$package!
+  },
   typeInfo: FirebaseConfigType
 };
 

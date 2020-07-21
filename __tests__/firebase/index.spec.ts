@@ -62,11 +62,31 @@ test('Seed app', async done => {
   });
 
   const tasks = Core.createSet(appCollections.tasks, {
-    compile: { isDone: false, description: 'Compile Code', user: Core.objRef(users.bill) },
-    compile2: { isDone: true, description: 'Compile Code 2', user: Core.objRef(users.bill) },
-    compile3: { isDone: false, description: 'Compile Code 3', user: Core.objRef(users.bill) },
-    compile4: { isDone: false, description: 'Compile Code 4', user: Core.objRef(users.bill) },
-    deploy: { isDone: false, description: 'Deploy Code', user: Core.objRef(users.joe) }
+    compile: {
+      isDone: false,
+      description: 'Compile Code',
+      user: Core.objRef(users.bill)
+    },
+    compile2: {
+      isDone: true,
+      description: 'Compile Code 2',
+      user: Core.objRef(users.bill)
+    },
+    compile3: {
+      isDone: false,
+      description: 'Compile Code 3',
+      user: Core.objRef(users.bill)
+    },
+    compile4: {
+      isDone: false,
+      description: 'Compile Code 4',
+      user: Core.objRef(users.bill)
+    },
+    deploy: {
+      isDone: false,
+      description: 'Deploy Code',
+      user: Core.objRef(users.joe)
+    }
   });
 
   const seed = {

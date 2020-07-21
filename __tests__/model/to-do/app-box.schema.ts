@@ -36,7 +36,10 @@ const FooCollectionsType: r.TypeInfo = {
 };
 
 const FooCollections: r.Prototype<m.FooCollections> = {
-  ref: { $ref: FooCollectionsType.$id!, $refPackage: FooCollectionsType.$package! },
+  ref: {
+    $ref: FooCollectionsType.$id!,
+    $refPackage: FooCollectionsType.$package!
+  },
   typeInfo: FooCollectionsType
 };
 

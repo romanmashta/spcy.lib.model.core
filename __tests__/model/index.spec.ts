@@ -64,8 +64,16 @@ test('Seeds model tests', () => {
   });
 
   const tasks = Core.createSet(appCollections.tasks, {
-    compile: { isDone: false, description: 'Compile Code', user: Core.objRef(users.bill) },
-    deploy: { isDone: false, description: 'Deploy Code', user: Core.objRef(users.joe) }
+    compile: {
+      isDone: false,
+      description: 'Compile Code',
+      user: Core.objRef(users.bill)
+    },
+    deploy: {
+      isDone: false,
+      description: 'Deploy Code',
+      user: Core.objRef(users.joe)
+    }
   });
 
   const seed = {
