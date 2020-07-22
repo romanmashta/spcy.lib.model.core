@@ -24,6 +24,7 @@ export class FirebaseAppController implements Core.Activable {
   async queryCollection() {
     if (!this.db) return;
 
+    console.log('query collection');
     const data = await this.db.collection('collections').get();
     const objects = data.docs.map(doc => [doc.id, doc.data()]);
     const snapshot = _.fromPairs(objects);

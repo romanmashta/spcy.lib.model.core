@@ -5,12 +5,10 @@ import { createInstance } from '@spcy/lib.core.mst-model';
 import * as firebase from 'firebase';
 import * as Core from '../../src';
 import { collection, queryInterface } from '../../src';
-import { Types as ToDoTypes } from '../model/to-do/index.schema';
 import { Types as AppTypes } from './app.schema';
 import { App } from './app.model';
 
 Reflection.SchemaRepository.registerTypes(Reflection.Types);
-Reflection.SchemaRepository.registerTypes(ToDoTypes);
 Reflection.SchemaRepository.registerTypes(Core.Types);
 Reflection.SchemaRepository.registerTypes(AppTypes);
 
@@ -40,9 +38,9 @@ test('Seed app', async done => {
   };
 
   const appCollections = Core.createSet(coreCollections.collections, {
-    tasks: collection('Tasks', ToDoTypes.ToDo),
-    users: collection('Users', ToDoTypes.User),
-    roles: collection('Role', ToDoTypes.Role)
+    tasks: collection('Tasks', Core.Types.ToDo),
+    users: collection('Users', Core.Types.User),
+    roles: collection('Role', Core.Types.Role)
   });
 
   const collections = {

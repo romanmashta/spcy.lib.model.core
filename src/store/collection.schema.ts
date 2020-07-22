@@ -55,10 +55,7 @@ const CollectionWithTypeType: r.TypeInfo = {
 };
 
 const CollectionWithType: r.PrototypeInfo = {
-  ref: {
-    $ref: CollectionWithTypeType.$id!,
-    $refPackage: CollectionWithTypeType.$package!
-  },
+  ref: { $ref: CollectionWithTypeType.$id!, $refPackage: CollectionWithTypeType.$package! },
   typeInfo: CollectionWithTypeType
 };
 

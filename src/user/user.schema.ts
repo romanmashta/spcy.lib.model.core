@@ -1,5 +1,5 @@
 import * as r from '@spcy/lib.core.reflection';
-import * as m from './to-do.model';
+import * as m from './user.model';
 
 const ToDoType: r.TypeInfo = {
   $id: 'ToDo',
@@ -73,7 +73,7 @@ const Role: r.Prototype<m.Role> = {
   typeInfo: RoleType
 };
 
-export const ToDoModule: r.Module = {
+export const UserModule: r.Module = {
   $id: 'lib.model.core',
   $defs: {
     ToDo: ToDoType,

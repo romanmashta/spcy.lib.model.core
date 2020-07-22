@@ -1,12 +1,10 @@
 import '@spcy/lib.dev.tasty';
 import { SchemaRepository, Types as ReflectionTypes } from '@spcy/lib.core.reflection';
 import { createInstance, getData } from '@spcy/lib.core.mst-model';
-import { Types as ToDoTypes } from './to-do/index.schema';
 import * as Core from '../../src';
 import { collection, queryInterface, registerController } from '../../src';
 
 SchemaRepository.registerTypes(ReflectionTypes);
-SchemaRepository.registerTypes(ToDoTypes);
 SchemaRepository.registerTypes(Core.Types);
 
 test('Collection with inline type tests', () => {
@@ -30,7 +28,7 @@ test('Collection with type ref tests', () => {
   const todoCollection = createInstance(Core.Types.Collection, {
     name: 'users',
     collection: {
-      $type: ToDoTypes.User.ref
+      $type: Core.Types.User.ref
     }
   });
   expect(getData(todoCollection)).toMatchTastyShot('collection typeref');
@@ -42,9 +40,9 @@ test('Seeds model tests', () => {
   };
 
   const appCollections = Core.createSet(coreCollections.collections, {
-    tasks: collection('Tasks', ToDoTypes.ToDo),
-    users: collection('Users', ToDoTypes.User),
-    roles: collection('Role', ToDoTypes.Role)
+    tasks: collection('Tasks', Core.Types.ToDo),
+    users: collection('Users', Core.Types.User),
+    roles: collection('Role', Core.Types.Role)
   });
 
   const collections = {
@@ -98,10 +96,10 @@ class DummyUserController implements Core.Activable {
   }
 }
 
-registerController(DummyUserController, ToDoTypes.User, Core.Types.Activable);
+registerController(DummyUserController, Core.Types.User, Core.Types.Activable);
 
 test('Query component for model', () => {
-  const user = createInstance(ToDoTypes.User, {
+  const user = createInstance(Core.Types.User, {
     username: 'joe',
     roles: []
   });
