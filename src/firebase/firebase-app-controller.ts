@@ -9,6 +9,7 @@ export class FirebaseAppController implements Core.Activable {
   private model: Core.FirebaseApp;
   private firebase?: firebase.app.App;
   public db?: firebase.firestore.Firestore;
+  private listener?: () => void;
 
   constructor(model: Core.FirebaseApp) {
     this.model = model;
@@ -22,13 +23,20 @@ export class FirebaseAppController implements Core.Activable {
     await this.queryCollection();
   }
 
-  async deactivate() {}
+  async deactivate() {
+    if (this.listener) this.listener();
+  }
 
   async queryCollection() {
     if (!this.db) return;
 
-    console.log('query collection');
-    const data = await this.db.collection('collections').get();
+    const collection = this.db.collection('collections');
+    const data = await collection.get();
+    this.applyData(data);
+    this.listener = collection.onSnapshot(snap => this.applyData(snap));
+  }
+
+  applyData(data: firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData>) {
     const objects = data.docs.map(doc => [doc.id, doc.data()]);
     const snapshot = _.fromPairs(objects);
 

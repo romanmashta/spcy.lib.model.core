@@ -11,6 +11,7 @@ export class FirebaseCollectionController implements Core.Activable {
   private model: Core.Collection;
   private db?: firebase.firestore.Firestore;
   private collectionName: string;
+  private listener?: () => void;
 
   constructor(model: Core.Collection) {
     this.model = model;
@@ -24,18 +25,23 @@ export class FirebaseCollectionController implements Core.Activable {
   async activate() {
     if (this.activated) return;
     this.activated = true;
-    console.log('Collection activate ', this.model.name);
     await this.queryCollection();
   }
 
   async deactivate() {
-    console.log('Collection deactivate', this.model.name);
+    if (this.listener) this.listener();
   }
 
   async queryCollection() {
     if (!this.db) return;
 
-    const data = await this.db.collection(this.collectionName).get();
+    const collection = this.db.collection(this.collectionName);
+    const data = await collection.get();
+    this.applyData(data);
+    this.listener = collection.onSnapshot(snap => this.applyData(snap));
+  }
+
+  applyData(data: firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData>) {
     const objects = data.docs.map(doc => [doc.id, doc.data()]);
     const snapshot = _.fromPairs(objects);
 

@@ -116,18 +116,18 @@ test('Seed app', async done => {
 test('Seed app 2', async done => {
   done();
   return;
-  const appController = queryInterface(app, Core.Types.Activable);
+  const appController = queryInterface(app, Core.Types.Activable)!;
   await appController.activate();
   console.log('activated');
   const tApp = app as App;
   const tasks = tApp.collections?.tasks;
   const users = tApp.collections?.users;
 
-  const tasksController = queryInterface(tasks, Core.Types.Activable);
+  const tasksController = queryInterface(tasks, Core.Types.Activable)!;
   await tasksController.activate();
   console.log('collection tasks', JSON.stringify(tasks, undefined, 2));
 
-  const usersController = queryInterface(users, Core.Types.Activable);
+  const usersController = queryInterface(users, Core.Types.Activable)!;
   await usersController.activate();
   console.log('collection users', JSON.stringify(users, undefined, 2));
 
