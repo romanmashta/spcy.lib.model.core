@@ -7,6 +7,7 @@ import { FirebaseAppController } from './firebase-app-controller';
 import { queryInterface, registerController } from '../controllers';
 
 export class FirebaseCollectionController implements Core.Activable {
+  private activated = false;
   private model: Core.Collection;
   private db?: firebase.firestore.Firestore;
   private collectionName: string;
@@ -21,6 +22,8 @@ export class FirebaseCollectionController implements Core.Activable {
   }
 
   async activate() {
+    if (this.activated) return;
+    this.activated = true;
     console.log('Collection activate ', this.model.name);
     await this.queryCollection();
   }

@@ -5,6 +5,7 @@ import { Types as CoreTypes } from '../index.schema';
 import { registerController } from '../controllers';
 
 export class FirebaseAppController implements Core.Activable {
+  private activated = false;
   private model: Core.FirebaseApp;
   private firebase?: firebase.app.App;
   public db?: firebase.firestore.Firestore;
@@ -14,6 +15,8 @@ export class FirebaseAppController implements Core.Activable {
   }
 
   async activate() {
+    if (this.activated) return;
+    this.activated = true;
     this.firebase = firebase.initializeApp(this.model.config);
     this.db = this.firebase.firestore();
     await this.queryCollection();

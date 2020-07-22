@@ -21,7 +21,7 @@ export const registerController = <A, T>(
   compnentsMap[name] = controllerClass;
 };
 
-export const queryInterface = <A, T>(model: T, interfaceRef: Reflection.Prototype<A>): A => {
+export const queryInterface = <A, T>(model: T, interfaceRef: Reflection.Prototype<A>): A | undefined => {
   const modelObject = (model as unknown) as ModelObject<T>;
   const interfaceTypeId = `${interfaceRef.ref.$refPackage}.${interfaceRef.ref.$ref}`;
 
@@ -32,8 +32,10 @@ export const queryInterface = <A, T>(model: T, interfaceRef: Reflection.Prototyp
   if (existing) return (existing as unknown) as A;
 
   const objectWithType = (getType(model) as unknown) as Mst.ModelWithType;
+  if (!objectWithType.$typeInfo) return undefined;
   const objectTypeId = `${objectWithType.$typeInfo.$package}.${objectWithType.$typeInfo.$id}`;
   const ComponentClass = compnentsMap[`${objectTypeId}:${interfaceTypeId}`] as new (model: T) => A;
+  if (!ComponentClass) return undefined;
 
   const component = (new ComponentClass(model) as unknown) as Component<T>;
   components.set(interfaceTypeId, component);
