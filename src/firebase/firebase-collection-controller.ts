@@ -10,7 +10,7 @@ export class FirebaseCollectionController implements Core.Activable {
   private activated = false;
   private model: Core.Collection;
   private db?: firebase.firestore.Firestore;
-  private collectionName: string;
+  private collectionName?: string;
   private listener?: () => void;
 
   constructor(model: Core.Collection) {
@@ -18,6 +18,7 @@ export class FirebaseCollectionController implements Core.Activable {
     const collections = mst.getParent(model);
     const fbApp = mst.getParent(collections) as Core.FirebaseApp;
     const parentController = queryInterface(fbApp, CoreTypes.Activable) as FirebaseAppController;
+    if (!parentController) return;
     this.db = parentController.db;
     this.collectionName = mst.getRelativePath(collections, model);
   }
@@ -33,7 +34,7 @@ export class FirebaseCollectionController implements Core.Activable {
   }
 
   async queryCollection() {
-    if (!this.db) return;
+    if (!this.db || !this.collectionName) return;
 
     const collection = this.db.collection(this.collectionName);
     const data = await collection.get();
