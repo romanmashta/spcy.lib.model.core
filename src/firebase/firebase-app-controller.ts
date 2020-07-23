@@ -4,6 +4,8 @@ import * as Core from '../index.model';
 import { Types as CoreTypes } from '../index.schema';
 import { registerController } from '../controllers';
 
+const firebaseApps: { [name: string]: firebase.app.App } = {};
+
 export class FirebaseAppController implements Core.Activable {
   private activated = false;
   private model: Core.FirebaseApp;
@@ -18,7 +20,9 @@ export class FirebaseAppController implements Core.Activable {
   async activate() {
     if (this.activated) return;
     this.activated = true;
-    this.firebase = firebase.initializeApp(this.model.config);
+    const { config } = this.model;
+    this.firebase = firebaseApps[config.appId] || firebase.initializeApp(config, config.appId);
+    firebaseApps[config.appId] = this.firebase;
     this.db = this.firebase.firestore();
     await this.queryCollection();
   }
