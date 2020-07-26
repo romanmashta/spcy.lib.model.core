@@ -5,12 +5,9 @@ import { createInstance } from '@spcy/lib.core.mst-model';
 import * as firebase from 'firebase';
 import * as Core from '../../src';
 import { collection, queryInterface } from '../../src';
-import { Types as AppTypes } from './app.schema';
-import { App } from './app.model';
 
 Reflection.SchemaRepository.registerTypes(Reflection.Types);
 Reflection.SchemaRepository.registerTypes(Core.Types);
-Reflection.SchemaRepository.registerTypes(AppTypes);
 
 const app = createInstance(Core.Types.FirebaseApp, {
   name: 'Sandbox',
@@ -119,9 +116,8 @@ test('Seed app 2', async done => {
   const appController = queryInterface(app, Core.Types.Activable)!;
   await appController.activate();
   console.log('activated');
-  const tApp = app as App;
-  const tasks = tApp.collections?.tasks;
-  const users = tApp.collections?.users;
+  const tasks = app.collections?.tasks;
+  const users = app.collections?.users;
 
   const tasksController = queryInterface(tasks, Core.Types.Activable)!;
   await tasksController.activate();

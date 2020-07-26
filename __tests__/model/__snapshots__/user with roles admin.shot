@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Add string to string array 1`] = `
+{
+  "name": "john",
+  "roles": [
+    "admin",
+    "guest"
+  ]
+}
+`;

@@ -1,3 +1,4 @@
+import { TypeInfo } from '@spcy/lib.core.reflection';
 import { Collection } from '../store/index.model';
 
 export interface FirebaseConfig {
@@ -16,9 +17,4 @@ export interface FirebaseApp {
   collections?: {
     [name: string]: Collection;
   };
-}
-
-export interface Activable {
-  activate(): void;
-  deactivate(): void;
 }

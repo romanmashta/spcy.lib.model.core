@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Add user to array 1`] = `
+{
+  "name": "kitchen",
+  "users": [
+    {
+      "name": "john",
+      "roles": [
+        "admin"
+      ]
+    },
+    {
+      "name": "doe",
+      "roles": [
+        "guest"
+      ]
+    }
+  ]
+}
+`;

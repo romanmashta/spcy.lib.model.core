@@ -1,11 +1,13 @@
 import '@spcy/lib.dev.tasty';
-import { SchemaRepository, Types as ReflectionTypes } from '@spcy/lib.core.reflection';
+import * as cr from '@spcy/lib.core.reflection';
 import { createInstance, getData } from '@spcy/lib.core.mst-model';
 import * as Core from '../../src';
 import { collection, queryInterface, registerController } from '../../src';
+import * as ToDo from '../models/to-do';
 
-SchemaRepository.registerTypes(ReflectionTypes);
-SchemaRepository.registerTypes(Core.Types);
+cr.SchemaRepository.registerTypes(cr.Types);
+cr.SchemaRepository.registerTypes(Core.Types);
+cr.SchemaRepository.registerTypes(ToDo.Types);
 
 test('Collection with inline type tests', () => {
   const todoCollection = createInstance(Core.Types.Collection, {
@@ -106,4 +108,48 @@ test('Query component for model', () => {
   const c1 = queryInterface(user, Core.Types.Activable);
   const c2 = queryInterface(user, Core.Types.Activable);
   expect(c1).toBe(c2);
+});
+
+test('Add string to string array', async done => {
+  const user = createInstance(ToDo.Types.UserWithRoles, { name: 'john', roles: [] });
+  const { roles } = user;
+
+  const nodeActions = queryInterface(roles, Core.Types.NodeActions);
+
+  await nodeActions?.add(undefined, async () => {
+    return 'admin';
+  });
+
+  await nodeActions?.add(undefined, async () => {
+    return 'guest';
+  });
+
+  expect(user).toMatchTastyShot('user with roles admin');
+  done();
+});
+
+test('Add user to array', async done => {
+  const room = createInstance(ToDo.Types.Room, { name: 'kitchen', users: [] });
+  const { users } = room;
+
+  const nodeActions = queryInterface(users, Core.Types.NodeActions);
+
+  await nodeActions?.add<ToDo.UserWithRoles>(undefined, async user => {
+    user.patch(self => {
+      self.name = 'john';
+      self.roles = ['admin'];
+    });
+    return user;
+  });
+
+  await nodeActions?.add<ToDo.UserWithRoles>(undefined, async user => {
+    user.patch(self => {
+      self.name = 'doe';
+      self.roles = ['guest'];
+    });
+    return user;
+  });
+
+  expect(room).toMatchTastyShot('room with users');
+  done();
 });
