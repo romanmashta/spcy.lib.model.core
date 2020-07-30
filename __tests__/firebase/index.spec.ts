@@ -110,7 +110,7 @@ test('Seed app', async done => {
   done();
 });
 
-test('Seed app 2', async done => {
+test('Get data from firestore', async done => {
   done();
   return;
   const appController = queryInterface(app, Core.Types.Activable)!;
