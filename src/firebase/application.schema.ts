@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import * as r from '@spcy/lib.core.reflection';
 import * as m from './application.model';
 
