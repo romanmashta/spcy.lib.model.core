@@ -1,4 +1,3 @@
-import { TypeInfo } from '@spcy/lib.core.reflection';
 import { Collection } from '../store/index.model';
 
 export interface FirebaseConfig {

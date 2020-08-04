@@ -47,6 +47,7 @@ export class FirebaseCollectionController implements Core.Activable {
     const snapshot = _.fromPairs(objects);
 
     this.model.patch(self => {
+      // eslint-disable-next-line no-param-reassign
       self.collection.objects = snapshot;
     });
   }

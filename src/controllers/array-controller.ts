@@ -1,3 +1,4 @@
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 import * as cr from '@spcy/lib.core.reflection';
 import { createInstanceForRef, getObjectSchema, getParentObject } from '@spcy/lib.core.mst-model';
 import { TypeInfo } from '@spcy/lib.core.reflection';
@@ -33,7 +34,7 @@ export class ArrayController implements Core.NodeActions {
   }
 
   remove(node: unknown): void {
-    console.log('remove', node);
+    throw new Error(`Remove not implemented ${node} ${this}`);
   }
 }
 registerController(ArrayController, cr.Types.ArrayType, CoreSchema.Types.NodeActions);
