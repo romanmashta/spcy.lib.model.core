@@ -25,6 +25,7 @@ const app = createInstance(Core.Types.FirebaseApp, {
 test('Seed app', async done => {
   done();
   return;
+  // eslint-disable-next-line no-unreachable
   firebase.initializeApp(app.config);
 
   const db = firebase.firestore();
@@ -113,6 +114,7 @@ test('Seed app', async done => {
 test('Get data from firestore', async done => {
   done();
   return;
+  // eslint-disable-next-line no-unreachable
   const appController = queryInterface(app, Core.Types.Activable)!;
   await appController.activate();
   console.log('activated');
