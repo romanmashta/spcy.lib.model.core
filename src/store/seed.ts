@@ -15,6 +15,7 @@ export interface Resolvable {
 }
 
 export const objRef = (obj: unknown) => ({ $ref: (obj as Resolvable).ref() });
+export const $ = objRef;
 
 export const createSet = <U extends ObjectSet<T>, T>(collection: TypedCollection<T>, objects: U): U => {
   const collectionRefFunc = ((collection as unknown) as Resolvable).ref;
