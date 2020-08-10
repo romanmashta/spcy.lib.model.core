@@ -4,3 +4,4 @@ export * from './store';
 export * from './firebase';
 export * from './seed';
 export * from './controllers';
+export * from './views';
