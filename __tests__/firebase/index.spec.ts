@@ -86,7 +86,6 @@ test('Seed app', async done => {
   });
 
   const seed = {
-    collections,
     roles,
     users,
     tasks,
