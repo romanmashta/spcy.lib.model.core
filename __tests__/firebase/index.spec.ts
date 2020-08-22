@@ -30,21 +30,11 @@ test('Seed app', async done => {
 
   const db = firebase.firestore();
 
-  const coreCollections = {
-    collections: collection('Collection', Core.Types.Collection),
-    types: collection('Types', Reflection.Types.Module)
-  };
-
-  const appCollections = Core.createSet(coreCollections.collections, {
+  const appCollections = Core.createSet(Core.Seed.collections.collections, {
     tasks: collection('Tasks', Core.Types.ToDo),
     users: collection('Users', Core.Types.User),
     roles: collection('Role', Core.Types.Role)
   });
-
-  const collections = {
-    ...coreCollections,
-    ...appCollections
-  };
 
   const roles = Core.createSet(appCollections.roles, {
     admin: { name: 'admin' },
@@ -85,13 +75,18 @@ test('Seed app', async done => {
     }
   });
 
-  const seed = {
+  const collections = {
+    ...appCollections
+  };
+
+  const appSeed = {
+    collections,
     roles,
     users,
-    tasks,
-    ...Reflection.Seed,
-    ...Core.Seed
+    tasks
   };
+
+  const seed = _.merge(Reflection.Seed, Core.Seed, appSeed);
 
   await Promise.all(
     _.flatten(
