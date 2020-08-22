@@ -8,7 +8,7 @@ exports[`Seeds model tests 1`] = `
       "collection": {
         "$type": {
           "$ref": "Collection",
-          "$refPackage": "lib.model.core"
+          "$refPackage": "lib.standard.core"
         }
       }
     },
@@ -17,7 +17,7 @@ exports[`Seeds model tests 1`] = `
       "collection": {
         "$type": {
           "$ref": "ToDo",
-          "$refPackage": "lib.model.core"
+          "$refPackage": "lib.standard.core"
         }
       }
     },
@@ -26,7 +26,7 @@ exports[`Seeds model tests 1`] = `
       "collection": {
         "$type": {
           "$ref": "User",
-          "$refPackage": "lib.model.core"
+          "$refPackage": "lib.standard.core"
         }
       }
     },
@@ -35,7 +35,7 @@ exports[`Seeds model tests 1`] = `
       "collection": {
         "$type": {
           "$ref": "Role",
-          "$refPackage": "lib.model.core"
+          "$refPackage": "lib.standard.core"
         }
       }
     }

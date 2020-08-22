@@ -3,7 +3,7 @@ import * as r from '@spcy/lib.core.reflection';
 import { UserModule, Types as UserTypes } from './user.schema';
 
 export const IndexModule: r.Module = {
-  $id: 'lib.model.core',
+  $id: 'lib.standard.core',
   $defs: {
     ...UserModule.$defs
   }

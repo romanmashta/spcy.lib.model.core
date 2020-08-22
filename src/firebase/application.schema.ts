@@ -4,7 +4,7 @@ import * as m from './application.model';
 
 const FirebaseConfigType: r.TypeInfo = {
   $id: 'FirebaseConfig',
-  $package: 'lib.model.core',
+  $package: 'lib.standard.core',
   type: 'object',
   required: ['apiKey', 'authDomain', 'databaseURL', 'projectId', 'storageBucket', 'messagingSenderId', 'appId'],
   properties: {
@@ -39,7 +39,7 @@ const FirebaseConfig: r.Prototype<m.FirebaseConfig> = {
 
 const FirebaseAppType: r.TypeInfo = {
   $id: 'FirebaseApp',
-  $package: 'lib.model.core',
+  $package: 'lib.standard.core',
   type: 'object',
   required: ['name', 'config'],
   properties: {
@@ -48,13 +48,13 @@ const FirebaseAppType: r.TypeInfo = {
     },
     config: {
       $ref: 'FirebaseConfig',
-      $refPackage: 'lib.model.core'
+      $refPackage: 'lib.standard.core'
     },
     collections: {
       type: 'object',
       additionalProperties: {
         $ref: 'Collection',
-        $refPackage: 'lib.model.core'
+        $refPackage: 'lib.standard.core'
       }
     }
   }
@@ -66,7 +66,7 @@ const FirebaseApp: r.Prototype<m.FirebaseApp> = {
 };
 
 export const ApplicationModule: r.Module = {
-  $id: 'lib.model.core',
+  $id: 'lib.standard.core',
   $defs: {
     FirebaseConfig: FirebaseConfigType,
     FirebaseApp: FirebaseAppType

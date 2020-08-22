@@ -4,7 +4,7 @@ import * as m from './collection.model';
 
 const CollectionType: r.TypeInfo = {
   $id: 'Collection',
-  $package: 'lib.model.core',
+  $package: 'lib.standard.core',
   type: 'object',
   required: ['name', 'collection'],
   properties: {
@@ -28,12 +28,12 @@ const Collection: r.Prototype<m.Collection> = {
 
 const CollectionWithTypeType: r.TypeInfo = {
   $id: 'CollectionWithType',
-  $package: 'lib.model.core',
+  $package: 'lib.standard.core',
   $typeArguments: ['T'],
   allOf: [
     {
       $ref: 'Collection',
-      $refPackage: 'lib.model.core'
+      $refPackage: 'lib.standard.core'
     },
     {
       type: 'object',
@@ -45,10 +45,10 @@ const CollectionWithTypeType: r.TypeInfo = {
           $arguments: [
             {
               $ref: 'T',
-              $refPackage: 'lib.model.core'
+              $refPackage: 'lib.standard.core'
             }
           ],
-          $refArguments: 'lib.model.core.T'
+          $refArguments: 'lib.standard.core.T'
         }
       }
     }
@@ -61,7 +61,7 @@ const CollectionWithType: r.PrototypeInfo = {
 };
 
 export const CollectionModule: r.Module = {
-  $id: 'lib.model.core',
+  $id: 'lib.standard.core',
   $defs: {
     Collection: CollectionType,
     CollectionWithType: CollectionWithTypeType

@@ -4,7 +4,7 @@ import { CollectionModule, Types as CollectionTypes } from './collection.schema'
 import { QueryModule, Types as QueryTypes } from './query.schema';
 
 export const IndexModule: r.Module = {
-  $id: 'lib.model.core',
+  $id: 'lib.standard.core',
   $defs: {
     ...CollectionModule.$defs,
     ...QueryModule.$defs

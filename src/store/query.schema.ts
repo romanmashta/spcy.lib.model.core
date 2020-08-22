@@ -4,7 +4,7 @@ import * as m from './query.model';
 
 const StatementType: r.TypeInfo = {
   $id: 'Statement',
-  $package: 'lib.model.core',
+  $package: 'lib.standard.core',
   oneOf: [
     {
       type: 'string'
@@ -22,7 +22,7 @@ const StatementType: r.TypeInfo = {
       type: 'array',
       items: {
         $ref: 'Statement',
-        $refPackage: 'lib.model.core'
+        $refPackage: 'lib.standard.core'
       }
     }
   ]
@@ -35,7 +35,7 @@ const Statement: r.Prototype<m.Statement> = {
 
 const QueryType: r.TypeInfo = {
   $id: 'Query',
-  $package: 'lib.model.core',
+  $package: 'lib.standard.core',
   type: 'object',
   required: ['collection'],
   properties: {
@@ -46,7 +46,7 @@ const QueryType: r.TypeInfo = {
       type: 'array',
       items: {
         $ref: 'Statement',
-        $refPackage: 'lib.model.core'
+        $refPackage: 'lib.standard.core'
       }
     }
   }
@@ -58,7 +58,7 @@ const Query: r.Prototype<m.Query> = {
 };
 
 export const QueryModule: r.Module = {
-  $id: 'lib.model.core',
+  $id: 'lib.standard.core',
   $defs: {
     Statement: StatementType,
     Query: QueryType

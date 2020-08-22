@@ -4,7 +4,7 @@ import * as m from './app-box.model';
 
 const UserWithRolesType: r.TypeInfo = {
   $id: 'UserWithRoles',
-  $package: 'lib.model.core',
+  $package: 'lib.standard.core',
   type: 'object',
   properties: {
     name: {
@@ -26,7 +26,7 @@ const UserWithRoles: r.Prototype<m.UserWithRoles> = {
 
 const RoomType: r.TypeInfo = {
   $id: 'Room',
-  $package: 'lib.model.core',
+  $package: 'lib.standard.core',
   type: 'object',
   required: ['users'],
   properties: {
@@ -37,7 +37,7 @@ const RoomType: r.TypeInfo = {
       type: 'array',
       items: {
         $ref: 'UserWithRoles',
-        $refPackage: 'lib.model.core'
+        $refPackage: 'lib.standard.core'
       }
     }
   }
@@ -49,7 +49,7 @@ const Room: r.Prototype<m.Room> = {
 };
 
 export const AppBoxModule: r.Module = {
-  $id: 'lib.model.core',
+  $id: 'lib.standard.core',
   $defs: {
     UserWithRoles: UserWithRolesType,
     Room: RoomType

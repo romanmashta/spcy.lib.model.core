@@ -4,7 +4,7 @@ import * as m from './user.model';
 
 const ToDoType: r.TypeInfo = {
   $id: 'ToDo',
-  $package: 'lib.model.core',
+  $package: 'lib.standard.core',
   type: 'object',
   required: ['isDone'],
   properties: {
@@ -20,10 +20,10 @@ const ToDoType: r.TypeInfo = {
       $arguments: [
         {
           $ref: 'User',
-          $refPackage: 'lib.model.core'
+          $refPackage: 'lib.standard.core'
         }
       ],
-      $refArguments: 'lib.model.core.User'
+      $refArguments: 'lib.standard.core.User'
     }
   }
 };
@@ -35,7 +35,7 @@ const ToDo: r.Prototype<m.ToDo> = {
 
 const UserType: r.TypeInfo = {
   $id: 'User',
-  $package: 'lib.model.core',
+  $package: 'lib.standard.core',
   type: 'object',
   required: ['username', 'roles'],
   properties: {
@@ -46,7 +46,7 @@ const UserType: r.TypeInfo = {
       type: 'array',
       items: {
         $ref: 'Role',
-        $refPackage: 'lib.model.core'
+        $refPackage: 'lib.standard.core'
       }
     }
   }
@@ -59,7 +59,7 @@ const User: r.Prototype<m.User> = {
 
 const RoleType: r.TypeInfo = {
   $id: 'Role',
-  $package: 'lib.model.core',
+  $package: 'lib.standard.core',
   type: 'object',
   required: ['name'],
   properties: {
@@ -75,7 +75,7 @@ const Role: r.Prototype<m.Role> = {
 };
 
 export const UserModule: r.Module = {
-  $id: 'lib.model.core',
+  $id: 'lib.standard.core',
   $defs: {
     ToDo: ToDoType,
     User: UserType,

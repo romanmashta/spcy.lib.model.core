@@ -6,7 +6,7 @@ exports[`Collection with type ref tests 1`] = `
   "collection": {
     "$type": {
       "$ref": "User",
-      "$refPackage": "lib.model.core"
+      "$refPackage": "lib.standard.core"
     },
     "objects": {}
   }

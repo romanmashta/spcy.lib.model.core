@@ -4,7 +4,7 @@ import * as m from './common.model';
 
 const ActivableType: r.TypeInfo = {
   $id: 'Activable',
-  $package: 'lib.model.core',
+  $package: 'lib.standard.core',
   type: 'object'
 };
 
@@ -15,7 +15,7 @@ const Activable: r.Prototype<m.Activable> = {
 
 const NodeActionsType: r.TypeInfo = {
   $id: 'NodeActions',
-  $package: 'lib.model.core',
+  $package: 'lib.standard.core',
   type: 'object'
 };
 
@@ -25,7 +25,7 @@ const NodeActions: r.Prototype<m.NodeActions> = {
 };
 
 export const CommonModule: r.Module = {
-  $id: 'lib.model.core',
+  $id: 'lib.standard.core',
   $defs: {
     Activable: ActivableType,
     NodeActions: NodeActionsType

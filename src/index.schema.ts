@@ -9,7 +9,7 @@ import { IndexModule as FirebaseIndexSchemaModule, Types as FirebaseIndexSchemaT
 import { IndexModule as UserIndexSchemaModule, Types as UserIndexSchemaTypes } from './user/index.schema';
 
 export const IndexModule: r.Module = {
-  $id: 'lib.model.core',
+  $id: 'lib.standard.core',
   $defs: {
     ...ControllersIndexSchemaModule.$defs,
     ...StoreIndexSchemaModule.$defs,
