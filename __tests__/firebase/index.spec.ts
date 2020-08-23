@@ -4,7 +4,7 @@ import * as Reflection from '@spcy/lib.core.reflection';
 import { createInstance } from '@spcy/lib.core.mst-model';
 import * as firebase from 'firebase';
 import * as Core from '../../src';
-import { collection, queryInterface } from '../../src';
+import { collection, query, queryInterface } from '../../src';
 
 Reflection.SchemaRepository.registerTypes(Reflection.Types);
 Reflection.SchemaRepository.registerTypes(Core.Types);
@@ -23,8 +23,8 @@ const app = createInstance(Core.Types.FirebaseApp, {
 });
 
 test('Seed app', async done => {
-  done();
-  return;
+  // done();
+  // return;
   // eslint-disable-next-line no-unreachable
   firebase.initializeApp(app.config);
 
@@ -34,6 +34,21 @@ test('Seed app', async done => {
     tasks: collection('Tasks', Core.Types.ToDo),
     users: collection('Users', Core.Types.User),
     roles: collection('Role', Core.Types.Role)
+  });
+
+  const queries = Core.createSet(Core.Seed.collections.queries, {
+    completed: query(Core.Types.ToDo, {
+      name: 'Completed',
+      source: Core.objRef(appCollections.tasks),
+      columns: ['isDone', 'description', 'user'],
+      criteria: [{ fieldPath: 'isDone', op: '==', value: true }]
+    }),
+    toDo: query(Core.Types.ToDo, {
+      name: 'To Do',
+      source: Core.objRef(appCollections.tasks),
+      columns: ['isDone', 'description', 'user'],
+      criteria: [{ fieldPath: 'isDone', op: '==', value: false }]
+    })
   });
 
   const roles = Core.createSet(appCollections.roles, {
@@ -83,7 +98,8 @@ test('Seed app', async done => {
     collections,
     roles,
     users,
-    tasks
+    tasks,
+    queries
   };
 
   const seed = _.merge(Reflection.Seed, Core.Seed, appSeed);

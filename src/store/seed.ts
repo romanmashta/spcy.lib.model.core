@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import * as Reflection from '@spcy/lib.core.reflection';
 import { Collection } from './collection.model';
+import { Query } from './query.model';
 
 export interface TypedCollection<T> extends Collection {
   _?: string;
@@ -30,3 +31,8 @@ export const collection = <T>(
   proto: Reflection.Prototype<T>,
   init: Partial<Collection> = {}
 ): TypedCollection<T> => ({ name, collection: { $type: proto.ref }, ...init });
+
+export const query = <T>(proto: Reflection.Prototype<T>, init: Query): Query => ({
+  collection: { $type: proto.ref },
+  ...init
+});
