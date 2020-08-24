@@ -7,7 +7,7 @@ import { FirebaseAppController } from './firebase-app-controller';
 import { queryInterface, registerController } from '../controllers';
 
 export class FirebaseQueryController implements Core.Activable {
-  private activated = false;
+  private activated = 0;
   private model: Core.Query;
   private db?: firebase.firestore.Firestore;
   private collectionName?: string;
@@ -23,12 +23,16 @@ export class FirebaseQueryController implements Core.Activable {
   }
 
   async activate() {
-    if (this.activated) return;
-    this.activated = true;
+    this.activated += 1;
+    if (this.activated > 1) return;
+    console.log('activate', this.model.name, this.activated);
     await this.queryCollection();
   }
 
   async deactivate() {
+    this.activated -= 1;
+    if (this.activated > 0) return;
+    console.log('deactivate', this.model.name, this.activated);
     if (this.listener) this.listener();
   }
 
