@@ -7,6 +7,10 @@ import {
 import { IndexModule as StoreIndexSchemaModule, Types as StoreIndexSchemaTypes } from './store/index.schema';
 import { IndexModule as FirebaseIndexSchemaModule, Types as FirebaseIndexSchemaTypes } from './firebase/index.schema';
 import { IndexModule as UserIndexSchemaModule, Types as UserIndexSchemaTypes } from './user/index.schema';
+import {
+  IndexModule as NavigationIndexSchemaModule,
+  Types as NavigationIndexSchemaTypes
+} from './navigation/index.schema';
 
 export const IndexModule: r.Module = {
   $id: 'lib.standard.core',
@@ -14,7 +18,8 @@ export const IndexModule: r.Module = {
     ...ControllersIndexSchemaModule.$defs,
     ...StoreIndexSchemaModule.$defs,
     ...FirebaseIndexSchemaModule.$defs,
-    ...UserIndexSchemaModule.$defs
+    ...UserIndexSchemaModule.$defs,
+    ...NavigationIndexSchemaModule.$defs
   }
 };
 
@@ -22,5 +27,6 @@ export const Types = {
   ...ControllersIndexSchemaTypes,
   ...StoreIndexSchemaTypes,
   ...FirebaseIndexSchemaTypes,
-  ...UserIndexSchemaTypes
+  ...UserIndexSchemaTypes,
+  ...NavigationIndexSchemaTypes
 };

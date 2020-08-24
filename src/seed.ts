@@ -6,7 +6,8 @@ import { collection } from './store';
 const collections = {
   collections: collection('Collection', Types.Collection),
   types: collection('Types', Reflection.Types.Module),
-  queries: collection('Queries', Types.Query)
+  queries: collection('Queries', Types.Query),
+  navigation: collection('Navigation', Types.Alias)
 };
 
 export const Seed = {

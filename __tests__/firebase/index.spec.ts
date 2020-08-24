@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import '@spcy/lib.dev.tasty';
 import * as Reflection from '@spcy/lib.core.reflection';
+import * as Icons from '@spcy/lib.standard.icons';
 import { createInstance } from '@spcy/lib.core.mst-model';
 import * as firebase from 'firebase';
 import * as Core from '../../src';
@@ -51,6 +52,15 @@ test('Seed app', async done => {
     })
   });
 
+  const navigation = Core.createSet(Core.Seed.collections.navigation, {
+    toDo: { name: 'To Do', Icon: Core.objRef(Icons.Seed.icons), Target: Core.objRef(queries.toDo) },
+    done: {
+      name: 'Done',
+      Icon: Core.objRef(Icons.Seed.icons.check_box_outline_blank),
+      Target: Core.objRef(queries.completed)
+    }
+  });
+
   const roles = Core.createSet(appCollections.roles, {
     admin: { name: 'admin' },
     user: { name: 'user' },
@@ -99,7 +109,8 @@ test('Seed app', async done => {
     roles,
     users,
     tasks,
-    queries
+    queries,
+    navigation
   };
 
   const seed = _.merge(Reflection.Seed, Core.Seed, appSeed);

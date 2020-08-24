@@ -41,6 +41,7 @@
   "dependencies": {
     "@spcy/lib.core.mst-model": "^1.0.0",
     "@spcy/lib.core.reflection": "^1.0.0",
+    "@spcy/lib.standard.icons": "^1.0.0",
     "@spcy/pub.mobx-state-tree": "^3.16.0",
     "dotenv": "^8.2.0",
     "firebase": "^7.16.0",
