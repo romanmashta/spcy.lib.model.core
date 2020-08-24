@@ -53,7 +53,7 @@ test('Seed app', async done => {
   });
 
   const navigation = Core.createSet(Core.Seed.collections.navigation, {
-    toDo: { name: 'To Do', Icon: Core.objRef(Icons.Seed.icons), Target: Core.objRef(queries.toDo) },
+    toDo: { name: 'To Do', Icon: Core.objRef(Icons.Seed.icons.check_box), Target: Core.objRef(queries.toDo) },
     done: {
       name: 'Done',
       Icon: Core.objRef(Icons.Seed.icons.check_box_outline_blank),
